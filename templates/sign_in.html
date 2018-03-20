@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+	{% if login_fail is defined %} <!-- Show up if username/password is incorrect -->
+	<div class="sign_up_modal sign_in_modal" id="sign_up_modal">
+		<div class="sign_up_modal_content">
+		  <span class="sign_up_modal_close">&times;</span>
+		  <strong>Username/Password is incorrect!</strong>
+		</div>
+	</div>
+	{% endif %}
+
+	{% if sign_up_success_ok is defined %} <!-- Show up if sign up success -->
+	<div class="sign_up_modal sign_in_modal" id="sign_up_modal">
+		<div class="my_account_modal_content">
+		  <span class="sign_up_modal_close">&times;</span>
+		  <strong>Sign up success!</strong>
+		</div>
+	</div>
+	{% endif %}
+
+	<form id="sign_in_form" action="sign_in_success" method="POST">
+		<fieldset>
+			<legend>Login</legend>
+			<div>
+				<div class="login_logo">
+					<i class="fa fa-user"></i>
+				</div>
+				<div class="form-group">
+			      <input class="form-control" name="sign_in_username" id="sign_in_username" placeholder="Username" type="text">
+			      <div class="invalid-feedback sign_in_space" id="sign_in_username_invalid">Username cannot be blank!</div>
+			    </div>
+			</div>
+
+		    <div>
+			    <div class="login_logo">
+			    	<i class="fa fa-lock"></i>
+			    </div>
+			    <div class="form-group">
+			      <input class="form-control" name="sign_in_password" id="sign_in_password" placeholder="Password" type="password">
+			      <div class="invalid-feedback sign_in_space" id="sign_in_password_invalid">Password cannot be blank!</div>
+			    </div>
+			</div>
+
+		    <div>
+			    <div class="form-group" id="login">
+					<button type="button" class="btn btn-primary" onclick="login()">Login</button>
+				</div>
+
+				<div class="form-group" id="sign_up">
+					<a href="{{ url_for('sign_up') }}" class="btn btn-primary">Sign Up</a>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+	{% if username_same_ac is defined %} <!-- Show up if username has been used -->
+	<div class="sign_up_modal" id="sign_up_modal">
+		<div class="sign_up_modal_content">
+		  <span class="sign_up_modal_close">&times;</span>
+		  <strong>Username has been used!</strong>
+		</div>
+	</div>
+	{% endif %}
+
+	<H2 class="introduction">Sign Up</H2>
+
+	<form id="sign_up_form" action="sign_up_success" method="POST">
+		<div class="form-group">
+	      <label for="sign_up_username">Username</label>
+		      <input class="form-control" name="sign_up_username" id="sign_up_username" placeholder="8 - 20 characters" type="text" maxlength="20">
+		      <div class="invalid-feedback" id="sign_up_username_invalid">Username must be between 8 -20 characters!</div>
+	    </div>
+
+	    <div class="form-group">
+	      <label for="sign_up_password">Password</label>
+	      <input class="form-control" name="sign_up_password" id="sign_up_password" placeholder="8 - 30 characters" type="password" maxlength="30">
+	      <div class="invalid-feedback" id="sign_up_password_invalid">Password must be between 8 -30 characters!</div>
+	    </div>
+
+	    <div class="form-group">
+	      <label for="sign_up_confirm_password">Confirm Password</label>
+	      <input class="form-control" name="sign_up_confirm_password" id="sign_up_confirm_password" placeholder="Type password again" type="password" maxlength="30">
+	      <div class="invalid-feedback" id="sign_up_confirm_password_invalid">It must be same as password!</div>
+	    </div>
+
+		<div class="form-group">
+	      <label for="sign_up_name">Name</label>
+	      <input class="form-control" name="sign_up_name" id="sign_up_name" type="text">
+	      <div class="invalid-feedback" id="sign_up_name_invalid">Name cannot be blank!</div>
+	    </div>
+
+		<div class="form-group">
+			<div id="sign_up_gender_break">
+				<label>Gender</label>
+			</div>
+			<div class="form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" name="sign_up_gender" id="sign_up_gender_male" value="Male" checked="" type="radio">
+					Male
+				</label>
+				<label class="form-check-label">
+					<input class="form-check-input" name="sign_up_gender" id="sign_up_gender_female" value="Female" type="radio">
+					Female
+				</label>
+			</div>
+		</div>
+
+		<div class="form-group">
+	      <label for="sign_up_phone">Phone</label>
+	      <input class="form-control" name="sign_up_phone" id="sign_up_phone" placeholder="8 numbers" type="tel" maxlength="8">
+	      <div class="invalid-feedback" id="sign_up_phone_invalid">Phone's format incorrect!</div>
+	    </div>
+
+	    <div class="form-group">
+		  <label for="sign_up_email1">Email address</label>
+		  <input class="form-control" name="sign_up_email" id="sign_up_email" placeholder="Enter email" type="email">
+		  <div class="invalid-feedback" id="sign_up_email_invalid">Email's format incorrect!</div>
+		  <small id="email_reminder" class="form-text text-muted">We'll never share your email with anyone else.</small>
+		</div>
+
+		<div>
+			<div class="form-group" id="sign_up_submit">
+				<span class="sign_up_submit_back"><button type="button" onclick="check_sign_up()" class="btn btn-primary">Submit</button></span>
+				<span><a href="{{ url_for('sign_in') }}" class="btn btn-primary">Back</a></span>
+			</div>
+		</div>
+	</form>
+{% endblock %}

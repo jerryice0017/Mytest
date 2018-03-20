@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+	{% if password_same is defined %} <!-- Show up if username has been used -->
+	<div class="sign_up_modal" id="sign_up_modal">
+		<div class="sign_up_modal_content">
+		  <span class="sign_up_modal_close">&times;</span>
+		  <strong>Password cannot be the old one!</strong>
+		</div>
+	</div>
+	{% endif %}
+
+	{% if update_success is defined %} <!-- Show up if update success -->
+	<div class="sign_up_modal" id="sign_up_modal">
+		<div class="my_account_modal_content">
+		  <span class="sign_up_modal_close">&times;</span>
+		  <strong>Update success!</strong>
+		</div>
+	</div>
+	{% endif %}
+
+	<H2 class="introduction">My Account</H2>
+
+	<form id="my_account_form" action="my_account_edit" method="POST">
+		<div class="form-group">
+		  <fieldset>
+		    <label class="control-label" for="my_account_name">Name</label>
+		    <input class="form-control" id="my_account_name" placeholder="{{ session['name_cookie'] }}" readonly="" type="text">
+		  </fieldset>
+		</div>
+
+	    <div class="form-group">
+	      <label for="my_account_password">New Password</label>
+	      <input class="form-control" name="my_account_password" id="my_account_password" placeholder="8 - 30 characters" type="password" maxlength="30">
+	      <div class="invalid-feedback" id="my_account_password_invalid">Password must be between 8 -30 characters!</div>
+	    </div>
+
+	    <div class="form-group">
+	      <label for="my_account_confirm_password">Confirm New Password</label>
+	      <input class="form-control" name="my_account_confirm_password" id="my_account_confirm_password" placeholder="Type password again" type="password" maxlength="30">
+	      <div class="invalid-feedback" id="my_account_confirm_password_invalid">It must be same as password!</div>
+	    </div>	
+
+	    <div class="form-group">
+	      <label for="my_account_phone">Phone</label>
+	      <input class="form-control" name="my_account_phone" id="my_account_phone" placeholder="{{ session['phone_cookie'] }}" type="tel" maxlength="8">
+	      <div class="invalid-feedback" id="my_account_phone_invalid">Phone's format incorrect!</div>
+	    </div>
+
+	    <div>
+			<div class="form-group" id="my_account_submit">
+				<span class="sign_up_submit_back set_bottom"><button type="button" onclick="my_account_check()" class="btn btn-primary">Submit</button></span>
+				<span class="set_bottom"><a href="{{ url_for('index') }}" class="btn btn-primary">Back</a></span>
+			</div>
+		</div>
+	</form>
+{% endblock %}
